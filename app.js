@@ -80,4 +80,4 @@ newGroup.expenseList.push(expense2);
 newGroup.expenseList.push(expense3);
 newGroup.expenseList.push(expense4);
 
-console.log((newGroup));
+console.log(newGroup);
