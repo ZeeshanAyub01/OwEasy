@@ -43,6 +43,8 @@ body {
 
 .navbar{
     float: right;
+    padding-left: 300px;
+    padding-right: 60px;
 }
 
 .navbarContainer {
@@ -55,7 +57,7 @@ body {
 }
 
 .para {
-    /* text-align: left; */
+    text-align: right;
     float: left;
 }
 
@@ -67,11 +69,38 @@ nav ul{
 
 nav li{
     display: inline-block;
+    text-align: center;
     padding-left: 70px;
     padding-top: 10px;
+    position: relative;
 }
 
 nav a{
-    color: black;
+    color: whitesmoke;
     text-decoration: none;
 }
+
+nav a:hover {
+    color:skyblue;
+    /*background-color: peru;*/
+}
+
+nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 100%;
+    background-color: #444;
+    position: absolute;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+/* a {
+    
+} */
