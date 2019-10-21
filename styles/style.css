@@ -6,11 +6,12 @@ body {
     font-weight: normal;
     /*font: normal 16px Arial, Helvetica, sans-serif;/*I could get rid of the above three if use this*/
     line-height: 1.6em;
-    
+    background-color: rgb(135, 198, 235);
 }
 
 .container {
-    background-color: rgb(135, 198, 235);
+    background-color: rgb(140, 155, 255);
+    border: thin black solid;
     width: 80%;
     /* height: auto; */
     margin: auto;
@@ -45,8 +46,9 @@ body {
     text-align: center;
 }
 
-.message{
+.rand_text_1{
     text-align: left;
+    font: italic;
     padding-left: 100px;
 }
 
@@ -70,8 +72,9 @@ body {
     float: left;
 }
 
-.Text-boxes{
-    
+
+label{
+    font: bold;
 }
 
 nav ul{
