@@ -14,6 +14,8 @@ body {
     width: 80%;
     /* height: auto; */
     margin: auto;
+    margin-top: 0;
+    
 }
 
 /* header{
@@ -27,6 +29,8 @@ body {
     width: 80%;
     height: 100%;
     margin: auto;
+    margin-bottom: 0;
+    
 }
 
 
@@ -39,6 +43,11 @@ body {
 .headings h1{
     font-style: italic;
     text-align: center;
+}
+
+.message{
+    text-align: left;
+    padding-left: 100px;
 }
 
 .navbar{
@@ -59,6 +68,10 @@ body {
 .para {
     text-align: right;
     float: left;
+}
+
+.Text-boxes{
+    
 }
 
 nav ul{
