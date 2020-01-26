@@ -1,59 +1,74 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title>Owe Easy</title>
-        <link rel="stylesheet" type="text/css" href="styles/style.css">
-        <div class="headCont">
-            <div class="headings">
-                <h1>Your personal debt resolution assistant...</h1>
-            </div>   
-            <div class="navbarContainer">
-                <div class="para">
-                    <p>        This is the navbar        </p>
-                </div>
-                <div class="navbar">
-                    <nav>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Pricing</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </head>
+<head>
+    <title>Owe Easy</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+</head>
     <body>
-        <div class="container">          
-            <div class="Text-boxes">
-                <h3>Enter a name for your group here:</h3>
-                <form>
-                    <input type="text" class="add__group" placeholder="Name of group">
-                    <button>Done</button>
-                </form>
-                <h3>Add group members here:</h3>
-                <form>
-                    <input type="text" class="add__member" placeholder="Name of member">
-                    <button>Add</button>
-                </form>
-                <h3>Add your transactions here:</h3>
-                <form>
-                    <input type="text" class="add__borrower" placeholder="Name of borrower">
-                    owes $
-                    <input type="number" class="add__amount" placeholder="Enter amount here">
-                    to
-                    <input type="text" class="add__lender" placeholder="Name of lender">
-                    for
-                    <input type="text" class="add__transaction" placeholder="The transaction">
-                <button>Add</button>
-                <button>Done</button>
-            </form>
-            </div>
-            
-        </div>
-    </body>
+    <section id="welcome_section">
+      <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div id="welcome">
+              <h1>Owe Easy</h1>
+              <h3>Splitting money made easier!</h3>
+              <hr></hr>
+          </div><!--End of welcome-->
+          </div><!--End of col-->
+          </div><!--End of row-->
+          <div class="btn_div">
+            <button class="btn btn-outline-success btn-lg my-2" id="start"><a href="#groupmates_section"><i class="fas fa-coins"></i>
+              Get Started!</a>
+            </button>
+          </div>
+          
+      </div><!--End of container-->
+
+    </section>
+
+    <section id="groupmates_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="groupmates_div">
+              <h4 style="text-align: center">Add names for the participants here</h4><!--Add a google font here-->
+              <div id="groupmates_form">
+                <form class="form-inline">
+                  <div class="form-group mt-4 mb-4" id="groupmates_inputs">
+                    <div><label for="participant_name" style="font-size: 1.2em;font-weight: 500;">Participant: </label></div>
+                    <div><input type="text" class="form-control" id="participant_name" placeholder="Type Participant Name"></div>
+                    <div><button type="submit" class="btn btn-primary pl-4 pr-4" id="groupmate_add_btn">Add</button></div> 
+                  </div><!--End of form-group m-4-->
+                  </form>
+                  </div><!--End of groupmates_form-->
+
+                  <div id="done_adding_groupmates">
+
+                      <div class="dropdown mr-4">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Added participants
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </div>
+
+                    <button type="submit" class="btn btn-primary mb-3 pl-5 pr-5" id="done_adding_btn">Done Adding</button>
+                  </div>
+            </div><!--End of groupmates_div-->
+
+      </div><!--End of container-->
+      </div><!--End of col-->
+      </div><!--End of row-->
+    </section>
+
+
     
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </body>
 </html>
