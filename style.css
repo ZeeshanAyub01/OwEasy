@@ -86,9 +86,29 @@ html {
     padding: 0.6em;
 }
 
-#groupmate_add_btn:hover {
+#participant_add_btn:hover {
     background-color: rgba(255, 165, 0, 0.9);
     padding: 0.6em;
+}
+
+#participant_names {
+    font-weight: 500;
+    background-position: bottom;
+}
+
+#participants_view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#transactions_section {
+    height: 100%;
+    background-image: url("https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Flearnvest%2Ffiles%2F2018%2F01%2Flv-three-friends-on-beach-tease-180117-1200x675.jpg");
+    background-color:white;
+    background-position: center;
+    background-size: cover;
+    /* background-blend-mode: lighten; */
 }
 
 #welcome_section {

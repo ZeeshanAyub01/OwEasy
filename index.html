@@ -4,7 +4,7 @@
     <title>Owe Easy</title>
     <script src="https://kit.fontawesome.com/de20837442.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css?v=3.4.2">
     <!--link rel="stylesheet" href="fontawesome/css/all.css"-->
 </head>
     <body>
@@ -40,25 +40,24 @@
                   <div class="form-group mt-4 mb-4" id="groupmates_inputs">
                     <div><label for="participant_name" style="font-size: 1.2em;font-weight: 500;">Participant: </label></div>
                     <div><input type="text" class="form-control" id="participant_name" placeholder="Type Participant Name"></div>
-                    <div><button type="submit" class="btn btn-primary pl-4 pr-4" id="groupmate_add_btn">Add</button></div> 
-                  </div><!--End of form-group m-4-->
+                    <div><button type="button" class="btn btn-primary pl-4 pr-4" id="participant_add_btn">Add</button></div> 
+                  <div id="participants_view">
+                    <!--h6>Participants added: <span id="num_participants">0</span></h6-->
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names">View the <span id="num_participants">0</span> participants added</button>
+                    <div id="participant_names" class="collapse">
+                      
+                    </div>
+                  </div>
+                  
+                  </div><!--End of form-group mt-4 mb-4-->
+                  
                   </form>
+                  
                   </div><!--End of groupmates_form-->
+  
 
                   <div id="done_adding_groupmates">
-
-                      <div class="dropdown mr-4">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Added participants
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </div>
-
-                    <button type="submit" class="btn btn-primary mb-3 pl-5 pr-5" id="done_adding_btn">Done Adding</button>
+                    <a href="#groupmates_section" id="done_adding_link"><button type="submit" class="btn btn-primary mb-3 pl-5 pr-5" id="done_adding_btn">Done Adding</button></a>
                   </div>
             </div><!--End of groupmates_div-->
 
@@ -67,9 +66,12 @@
       </div><!--End of row-->
     </section>
 
+    <section id="transactions_section">
 
+    </section>
     
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
     </body>
 </html>
