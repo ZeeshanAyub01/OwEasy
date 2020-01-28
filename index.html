@@ -33,7 +33,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div id="groupmates_div">
+            <div class="participants_actions_div">
               <h4 style="text-align: center">Add names for the participants here</h4><!--Add a google font here-->
               <div id="groupmates_form">
                 <form class="form-inline">
@@ -57,7 +57,7 @@
   
 
                   <div id="done_adding_groupmates">
-                    <a href="#groupmates_section" id="done_adding_link"><button type="submit" class="btn btn-primary mb-3 pl-5 pr-5" id="done_adding_btn">Done Adding</button></a>
+                    <a href="#groupmates_section" id="done_adding_link"><button type="submit" class="btn btn-primary pl-5 pr-5" id="done_adding_btn">Done Adding</button></a>
                   </div>
             </div><!--End of groupmates_div-->
 
@@ -67,7 +67,52 @@
     </section>
 
     <section id="transactions_section">
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="participants_actions_div" style="width: 80%;">
+              <h3 style="text-align: center;">Add your transactions here</h3>
+              <form class="form-inline">
+              <div style="margin-top: 5%;" id="transactions_div">
+                <select class="custom-select added_gpmates" id="added_participants_1">
+                  <option selected>Group mate...</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <span class="random_text">owes</span>
+                <select class="custom-select added_gpmates" id="added_participants_2">
+                  <option selected>Group mate...</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
 
+                <select class="custom-select" id="currency">
+                  <option selected>$</option>
+                  <option value="1">£</option>
+                  <option value="2">Rs.</option>
+                  <option value="3">Yen</option>
+                </select>
+
+                <input type="number" class="form-control amount" id="amount">
+
+                <span class="random_text"> for </span>
+
+                 <input type="text" class="w-25 form-control desc" id="transaction_desc">
+
+                <button type="button" class="btn btn-primary pt-1 pb1 -pl-3 pr-3" id="transaction_add_btn">Add</button>
+                </form>
+                
+                
+              </div><!--End of transactions_div-->
+              
+              
+
+            </div><!--End of participants_actions_div-->
+          </div><!--End of container-->
+        </div><!--End of col-->
+      </div><!--End of row-->
     </section>
     
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

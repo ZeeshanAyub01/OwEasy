@@ -44,6 +44,7 @@ var done_adding_link = document.getElementById('done_adding_link');
 
 add_btn.addEventListener("click", function(){
     if(parti_name.value){
+        //Add functionality to check if the participant name already exists
         let newParticipant = createParticipant(parti_name.value);
         if (participantList.length === 0){
             participant_names.textContent = '   ' + parti_name.value;
