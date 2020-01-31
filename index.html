@@ -39,11 +39,11 @@
                 <form class="form-inline">
                   <div class="form-group mt-4 mb-4" id="groupmates_inputs">
                     <div><label for="participant_name" style="font-size: 1.2em;font-weight: 500;">Participant: </label></div>
-                    <div><input type="text" class="form-control" id="participant_name" placeholder="Type Participant Name"></div>
+                    <div><input type="text" class="form-control" id="participant_name" placeholder="Participant Name"></div>
                     <div><button type="button" class="btn btn-primary pl-4 pr-4" id="participant_add_btn">Add</button></div> 
                   <div id="participants_view">
                     <!--h6>Participants added: <span id="num_participants">0</span></h6-->
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names">View the <span id="num_participants">0</span> participants added</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names">View the <span id="num_participants">0</span> new participants added</button>
                     <div id="participant_names" class="collapse">
                       
                     </div>
@@ -75,11 +75,11 @@
               <form class="form-inline">
               <div style="margin-top: 5%;" id="transactions_div">
                 <select class="custom-select added_gpmates" id="added_participants_1">
-                  <option selected></option>
+                  <option selected>debtor</option>
                 </select>
                 <span class="random_text">owes</span>
                 <select class="custom-select added_gpmates" id="added_participants_2">
-                  <option selected></option>
+                  <option selected>creditor</option>
                 </select>
 
                 <select class="custom-select" id="currency">
@@ -89,15 +89,16 @@
                   <option value="3">Yen</option>
                 </select>
 
-                <input type="number" class="form-control amount" id="amount" min="0" step="0.01">
+                <input type="number" class="form-control amount" id="amount" min="0" step="0.01" value="0.00">
 
                 <span class="random_text"> for </span>
 
-                 <input type="text" class="w-25 form-control desc" id="transaction_desc">
+                 <input type="text" class="w-25 form-control desc" id="transaction_desc" placeholder="description of expense">
 
-                <button type="button" class="btn btn-primary pt-1 pb1 -pl-3 pr-3" id="transaction_add_btn">Add</button>
+                <a href="#groupmates_section" id="transaction_add_link"><button type="button" class="btn btn-primary pt-1 pb1 -pl-3 pr-3" id="transaction_add_btn">Add</button></a>
                 </form>
-                
+
+                <!--h6>Participants added: <span id="num_participants">0</span></h6-->
                 
               </div><!--End of transactions_div-->
               
