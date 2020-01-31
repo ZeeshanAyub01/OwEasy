@@ -143,11 +143,11 @@ html {
 
 #transaction_add_btn {
     margin: 1%;
-    background-color: purple;
+    background-color: rgba(128,0,128,0.7);
 }
 
 #transaction_add_btn:hover {
-    background-color: rgba(228, 0, 58, 0.6);
+    background-color: rgba(58, 0, 158, 0.7);
     padding: 0.7em;
 }
 

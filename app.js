@@ -41,6 +41,10 @@ var done_adding = document.getElementById('done_adding_btn');
 var num_participants = document.getElementById('num_participants');
 var participant_names = document.getElementById('participant_names');
 var done_adding_link = document.getElementById('done_adding_link');
+var added_participants_1 = document.getElementById('added_participants_1');
+var added_participants_2 = document.getElementById('added_participants_2');
+var transaction_add_btn = document.getElementById('transaction_add_btn');
+var owed_amount = document.getElementById('amount');
 
 add_btn.addEventListener("click", function(){
     if(parti_name.value){
@@ -73,7 +77,17 @@ done_adding.addEventListener("click", function () {
     } 
     else{
         participantList.forEach(participant => {
-            console.log(participant);
+            console.log(participant.name);
+            added_participants_1.innerHTML += "<option>" + participant.name + "</option>";
+            added_participants_2.innerHTML += "<option>" + participant.name + "</option>";
         });
+        console.log(added_participants_1.innerHTML);
     }
 }); 
+
+transaction_add_btn.addEventListener("click", function () {
+    creditor = added_participants_2.value;
+    debtor = added_participants_1.value;
+    
+    console.log(debtor + ' owes ' + creditor + ' something');
+});
