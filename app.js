@@ -3,35 +3,47 @@ participantList = [];
 temp_list = [];
 var total_particpants = participantList.length;
 
-function createParticipant(name){
-    return{
-        _name: name,
-        get name(){
-            return this._name
-        },
-        set name(name){
-            if(typeof name === 'string'){
-                this._name = name;
-            }
-        },
-        _debts: [],
-        _credits: [],
-        get debts(){
-            return this._debts;
-        },
-        set debts(debts_list){
-            this._debts = debts_list;
-        },
-        get credits(){
-            return this._credits;
-        },
-        set credits(credits_list) {
-            this._credits = credits_list;
-        }
-        //Add attributes total_credit and total_debt and methods to calculate them automatically. You might have to consult codecademy for that
-        //or turn these objects into classes
-
+class Participant {
+    constructor(name) {
+        this._name = name;
+        this._credits = [];
+        this._debts = [];
+        this._total_credit = 0;
+        this._total_debt = 0;
     }
+
+    get name(){
+        return this._name;
+    }
+
+    get credits() {
+        return this._credits;
+    }
+
+    get debts() {
+        return this._debts;
+    }
+
+    get total_credit(){
+        this._total_credit = 0;
+        for (var i = 0; i < this._credits.length; i++){
+            this._total_credit += Number(this._credits[i].amount);
+        }
+        return this._total_credit;
+    }
+
+    get total_debt() {
+        this._total_debt = 0;
+        for (var i = 0; i < this._debts.length; i++) {
+            this._total_debt += Number(this._debts[i].amount);
+        }
+
+        return this._total_debt;
+    }
+
+
+
+
 }
 
 function createTransaction(creditor, debtor, amount, description){
@@ -56,7 +68,10 @@ function createTransaction(creditor, debtor, amount, description){
             return this._amount;
         },
         set amount(amount) {
-            this._amount = amount;
+            if(typeof amount === 'Number'){
+                this._amount = amount;
+            }
+            
         },
         get description() {
             return this._description;
@@ -92,7 +107,7 @@ add_btn.addEventListener("click", function(){
             }
         }
 
-        let newParticipant = createParticipant(parti_name.value);
+        let newParticipant = new Participant(parti_name.value);
         if (temp_list.length === 0){
             participant_names.textContent = '   ' + parti_name.value;
         }
@@ -133,7 +148,7 @@ done_adding.addEventListener("click", function () {
         temp_list = [];
         num_participants.textContent = 0;
         participant_names.textContent = '';
-        //console.log(added_participants_1.innerHTML);
+        console.log(participantList);
     }
 }); 
 
@@ -152,7 +167,7 @@ transaction_add_btn.addEventListener("click", function () {
 
     creditor = added_participants_2.value;
     debtor = added_participants_1.value;
-    amount = owed_amount.value;
+    amount = Number(owed_amount.value);
     currency = amount_currency.value;
     description = transaction_desc.value;
 
@@ -160,49 +175,33 @@ transaction_add_btn.addEventListener("click", function () {
 
     newTransaction = createTransaction(creditor, debtor, amount, description);
 
-    addDebt(debtor, newTransaction);
-    addCredit(creditor, newTransaction);
-    
+    participant_creditor = fetchParticipant(creditor);
+    participant_debtor = fetchParticipant(debtor);
+
+    // console.log('Creditor for this transacton: '+ participant_creditor.name);
+    // console.log('Debtor for this transaction: ' + participant_debtor.name);
+
+    participant_creditor.credits.push(newTransaction);
+    participant_debtor.debts.push(newTransaction);
+
+    console.log(participant_creditor.name + ' is owed a total of: ' + currency + participant_creditor.total_credit);
+    console.log(participant_debtor.name + ' owes a total of: ' + currency + participant_debtor.total_debt);
+
     added_participants_2.value = "";
     added_participants_1.value = "";
     owed_amount.value = "0.00";
     transaction_desc.value = "";
 
-    displayCredit(creditor);
-    displayDebt(debtor);
 
 });
 
-function addDebt(participant_name, transaction){
+function fetchParticipant(participant_name){
+
     for(var i = 0; i < participantList.length; i++){
-        if (participantList[i].name === participant_name){
-            participantList[i].debts.push(transaction);
+        if (participantList[i].name == participant_name){
+            return participantList[i];
         }
     }
-}
 
-function addCredit(participant_name, transaction) {
-    for (var i = 0; i < participantList.length; i++) {
-        if (participantList[i].name === participant_name) {
-            participantList[i].credits.push(transaction);
-        }
-    }
-}
-
-function displayCredit(participant_name) {
-    for (var i = 0; i < participantList.length; i++) {
-        if (participantList[i].name === participant_name) {
-            console.log(participantList[i].name);
-            console.log(participantList[i].credits);
-        }
-    }
-}
-
-function displayDebt(participant_name) {
-    for (var i = 0; i < participantList.length; i++) {
-        if (participantList[i].name === participant_name) {
-            console.log(participantList[i].name);
-            console.log(participantList[i].debts);
-        }
-    }
+    return null;
 }
