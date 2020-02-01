@@ -43,7 +43,7 @@
                     <div><button type="button" class="btn btn-primary pl-4 pr-4" id="participant_add_btn">Add</button></div> 
                   <div id="participants_view">
                     <!--h6>Participants added: <span id="num_participants">0</span></h6-->
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names">View the <span id="num_participants">0</span> new participants added</button>
+                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names" id="participants_view_btn">View the <span id="num_participants">0</span> new participants added</button>
                     <div id="participant_names" class="collapse">
                       
                     </div>
@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="participants_actions_div" style="width: 80%;">
+            <div class="participants_actions_div" style="width: 80%;margin-left: 10%;">
               <h3 style="text-align: center;">Add your transactions here</h3>
               <form class="form-inline">
               <div style="margin-top: 5%;" id="transactions_div">
@@ -99,7 +99,10 @@
                 </form>
 
                 <!--h6>Participants added: <span id="num_participants">0</span></h6-->
-                
+                <br><p>Transactions added: <span id="num_transactions">0</span></p></br>
+                <div id="done_adding_transactions">
+                    <button type="submit" class="btn btn-primary pl-5 pr-5" id="done_adding_trans_btn">Done Adding</button>
+                  </div>
               </div><!--End of transactions_div-->
               
               

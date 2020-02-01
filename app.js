@@ -8,8 +8,6 @@ class Participant {
         this._name = name;
         this._credits = [];
         this._debts = [];
-        this._total_credit = 0;
-        this._total_debt = 0;
     }
 
     get name(){
@@ -41,7 +39,9 @@ class Participant {
         return this._total_debt;
     }
 
-
+    get net_credit(){
+        return this.total_credit - this.total_debt;;
+    }
 
 
 }
@@ -184,8 +184,8 @@ transaction_add_btn.addEventListener("click", function () {
     participant_creditor.credits.push(newTransaction);
     participant_debtor.debts.push(newTransaction);
 
-    console.log(participant_creditor.name + ' is owed a total of: ' + currency + participant_creditor.total_credit);
-    console.log(participant_debtor.name + ' owes a total of: ' + currency + participant_debtor.total_debt);
+    console.log(participant_creditor.name + ' is owed a total of: ' + currency + participant_creditor.total_credit + '. Thus their net credit = ' + participant_creditor.net_credit);
+    console.log(participant_debtor.name + ' owes a total of: ' + currency + participant_debtor.total_debt + '. Thus their net credit = ' + participant_debtor.net_credit);
 
     added_participants_2.value = "";
     added_participants_1.value = "";
@@ -204,4 +204,8 @@ function fetchParticipant(participant_name){
     }
 
     return null;
+}
+
+function compare_net_credits(participant_1, participant_2){
+    return participant_1.net_credit - participant_2.net_credit;
 }
