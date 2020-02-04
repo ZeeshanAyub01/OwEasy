@@ -41,12 +41,21 @@
                     <div><label for="participant_name" style="font-size: 1.2em;font-weight: 500;">Participant: </label></div>
                     <div><input type="text" class="form-control" id="participant_name" placeholder="Participant Name"></div>
                     <div><button type="button" class="btn btn-primary pl-4 pr-4" id="participant_add_btn">Add</button></div> 
+
                   <div id="participants_view">
-                    <!--h6>Participants added: <span id="num_participants">0</span></h6-->
-                    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names" id="participants_view_btn">View the <span id="num_participants">0</span> new participants added</button>
+                    <!--button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#participant_names" id="participants_view_btn">View the <span id="num_participants">0</span> new participants added</button>
                     <div id="participant_names" class="collapse">
-                      
+                    </div-->
+
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="participants_view_btn">
+                      View the <span id="num_participants">0</span> new participants added
+                    </button>
+
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body" id='participant_names'>
+                      </div>
                     </div>
+
                   </div>
                   
                   </div><!--End of form-group mt-4 mb-4-->
@@ -99,10 +108,13 @@
                 </form>
 
                 <!--h6>Participants added: <span id="num_participants">0</span></h6-->
-                <br><p>Transactions added: <span id="num_transactions">0</span></p></br>
+                <br>Transactions added: <span id="num_transactions">0</span></p></br>
+                 <div>
+                </div>
                 <div id="done_adding_transactions">
                     <button type="button" class="btn btn-primary pl-5 pr-5" id="done_adding_trans_btn">Done Adding</button>
-                  </div>
+                </div>
+
               </div><!--End of transactions_div-->
               
               

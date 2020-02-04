@@ -41,47 +41,67 @@ class Participant {
     }
 
     get net_credit(){
-        return this.total_credit - this.total_debt;;
+        return this.total_credit - this.total_debt;
     }
 
 
 }
 
-function createTransaction(creditor, debtor, amount, description){
-    return {
-        _creditor: creditor,
-        _debtor: debtor,
-        _amount: amount,
-        _description: description,
-        get creditor(){
-            return this._creditor;
-        },
-        set creditor(creditor_name){
-            this._creditor = creditor_name;
-        },
-        get debtor() {
-            return this._debtor;
-        },
-        set debtor(debtor_name) {
-            this._debtor = debtor_name;
-        },
-        get amount() {
-            return this._amount;
-        },
-        set amount(amount) {
-            if(typeof amount === 'Number'){
-                this._amount = amount;
-            }
-            
-        },
-        get description() {
-            return this._description;
-        },
-        set description(description) {
-            this._description = description;
+class Transaction{
+    constructor(creditor, debtor, currency,  amount, description) {
+        this._creditor= creditor;
+        this._debtor= debtor;
+        this._currency = currency;
+        this._amount= amount;
+        this._description = description;
+    }
+
+    get creditor(){
+        return this._creditor;
+    }
+    set creditor(creditor_name){
+        this._creditor = creditor_name;
+    }
+    get debtor() {
+        return this._debtor;
+    }
+    set debtor(debtor_name) {
+        this._debtor = debtor_name;
+    }
+
+    get currency() {
+        return this._currency;
+    }
+
+    set currency(currency) {
+        this._currency = currency;
+
+    }
+
+    get amount() {
+        return this._amount;
+    }
+
+    set amount(amount) {
+        if (typeof amount === 'Number') {
+            this._amount = amount;
         }
+
     }
+    get description() {
+        return this._description;
+    }
+    set description(description) {
+        this._description = description;
+    }
+
+    get toString(){
+        return this.debtor + ' owes ' + this.creditor + ' ' + this.currency + this.amount + ' for ' + this.description;
+    }
+
 }
+
+    
 
 var add_btn = document.getElementById('participant_add_btn');
 var parti_name = document.getElementById('participant_name');
@@ -173,9 +193,10 @@ transaction_add_btn.addEventListener("click", function () {
     currency = amount_currency.value;
     description = transaction_desc.value;
 
-    console.log(debtor + ' owes ' + creditor + ' ' + currency + amount + ' for ' + description);
+    //console.log(debtor + ' owes ' + creditor + ' ' + currency + amount + ' for ' + description);
 
-    newTransaction = createTransaction(creditor, debtor, amount, description);
+    newTransaction = new Transaction(creditor, debtor, currency, amount, description);
+    console.log(newTransaction.toString);
 
     participant_creditor = fetchParticipant(creditor);
     participant_debtor = fetchParticipant(debtor);
@@ -281,6 +302,10 @@ done_adding_trans_btn.addEventListener("click", function () {
     while (shortList.length > 1){
         shortList = resolveADebt(shortList);
         shortList = generateShorterList(shortList);//To shorten the list based on participants whose unresolved_amount is still non-zero; called multiple times
+    }
+
+    if (shortList.length === 1){
+        console.log(shortList[0].name + ' still has an unresolved amount of: $' + shortList[0].unresolved_amount);
     }
 
     // sorted_low_to_high.sort(function (p1, p2){
