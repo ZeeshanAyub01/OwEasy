@@ -2,6 +2,7 @@
 participantList = [];
 temp_list = [];
 transactions_list = [];
+payments_list = [];
 var total_particpants = participantList.length;
 
 class Participant {
@@ -24,24 +25,38 @@ class Participant {
     }
 
     get total_credit(){
-        this._total_credit = 0;
+        let total_credit_amount = 0;
+        let total_credit_currency = '$';
+
         for (var i = 0; i < this._credits.length; i++){
-            this._total_credit += Number(this._credits[i].amount);
+            total_credit_amount += Number(this._credits[i].amount);
         }
-        return this._total_credit;
+
+        if (total_credit_amount === 0){
+            total_credit_currency = this._debts[0].currency;
+            //console.log('THis total credit currency and name: ' + this._debts[0].currency+this._name);
+        }
+
+        return { currency: total_credit_currency, amount: total_credit_amount};
     }
 
     get total_debt() {
-        this._total_debt = 0;
+        let total_debt_amount = 0;
+        let total_debt_currency = '$';
+
         for (var i = 0; i < this._debts.length; i++) {
-            this._total_debt += Number(this._debts[i].amount);
+            total_debt_amount += Number(this._debts[i].amount);
         }
 
-        return this._total_debt;
+        if (total_debt_amount === 0) {
+            total_debt_currency = this._credits[0].currency;
+        }
+
+        return { currency: total_debt_currency, amount: total_debt_amount };
     }
 
     get net_credit(){
-        return this.total_credit - this.total_debt;
+        return { currency : this.total_credit.currency, amount : this.total_credit.amount - this.total_debt.amount};
     }
 
 
@@ -102,6 +117,55 @@ class Transaction{
 }
 
     
+class Payment {
+    constructor(payer, payee, currency, amount){
+        this._payer = payer;
+        this._payee = payee;
+        this._currency = currency;
+        this._amount = amount;
+        this._description = description;
+    }
+
+    get payer() {
+        return this._payer;
+    }
+    set payer(payer_name) {
+        this._payer = payer_name;
+    }
+    get payee() {
+        return this._payee;
+    }
+    set payee(payee_name) {
+        this._payee = payee_name;
+    }
+
+    get currency() {
+        return this._currency;
+    }
+
+    set currency(currency) {
+        this._currency = currency;
+
+    }
+
+    get amount() {
+        return this._amount;
+    }
+
+    set amount(amount) {
+        if (typeof amount === 'Number') {
+            this._amount = amount;
+        }
+
+    }
+
+    get toString() {
+        return this.payer + ' must pay ' + this.payee + ' ' + this.currency + Math.abs(this.amount);
+    }
+
+}
+
+
 
 var add_btn = document.getElementById('participant_add_btn');
 var parti_name = document.getElementById('participant_name');
@@ -193,22 +257,15 @@ transaction_add_btn.addEventListener("click", function () {
     currency = amount_currency.value;
     description = transaction_desc.value;
 
-    //console.log(debtor + ' owes ' + creditor + ' ' + currency + amount + ' for ' + description);
-
     newTransaction = new Transaction(creditor, debtor, currency, amount, description);
     console.log(newTransaction.toString);
 
     participant_creditor = fetchParticipant(creditor);
     participant_debtor = fetchParticipant(debtor);
 
-    // console.log('Creditor for this transacton: '+ participant_creditor.name);
-    // console.log('Debtor for this transaction: ' + participant_debtor.name);
-
     participant_creditor.credits.push(newTransaction);
     participant_debtor.debts.push(newTransaction);
-
-    //console.log(participant_creditor.name + ' is owed a total of: ' + currency + participant_creditor.total_credit + '. Thus their net credit = ' + participant_creditor.net_credit);
-    //console.log(participant_debtor.name + ' owes a total of: ' + currency + participant_debtor.total_debt + '. Thus their net credit = ' + participant_debtor.net_credit);
+    transactions_list.push(newTransaction);
 
     added_participants_2.value = "";
     added_participants_1.value = "";
@@ -233,7 +290,7 @@ function addUnresolvedAmount() {
     shortList = [];
     j = 0;
     for (var i = 0; i < participantList.length; i++) {
-        if (participantList[i].net_credit != 0) {
+        if (participantList[i].net_credit.amount != 0) {
             shortList.push(participantList[i]);
             shortList[j].unresolved_amount = participantList[i].net_credit;
             j += 1;
@@ -247,7 +304,7 @@ function generateShorterList(initShortList){
     shorterList = [];
     
     for (var i = 0; i < initShortList.length; i++){
-        if (initShortList[i].unresolved_amount != 0){
+        if (initShortList[i].unresolved_amount.amount != 0){
             shorterList.push(initShortList[i]);
         }
         
@@ -259,31 +316,32 @@ function generateShorterList(initShortList){
 
 function resolveADebt(initShortList){
 
+    //console.log(initShortList[0]);
     initShortList.sort(function (p1, p2) {
-        return p1.unresolved_amount - p2.unresolved_amount;
+        //console.log(p1.unresolved_amount + ' and ' + p2.unresolved_amount.amount);
+        return p1.unresolved_amount.amount - p2.unresolved_amount.amount;
     });
 
     p1 = initShortList[0];
     p2 = initShortList[initShortList.length - 1];
 
-    ura_1 = p1.unresolved_amount;
-    ura_2 = p2.unresolved_amount;
+    ura_1 = p1.unresolved_amount.amount;
+    ura_2 = p2.unresolved_amount.amount;
 
-    //console.log('The UR of ' + p1.name + ' is: ' + p1.unresolved_amount + ' and the UR of ' + p2.name + ' is: ' + p2.unresolved_amount);
 
-    if (Math.abs(p1.unresolved_amount) > p2.unresolved_amount){
-        console.log(p1.name + ' should pay ' + p2.name + ' $' + Math.abs(p2.unresolved_amount));
-        initShortList[0].unresolved_amount += Math.abs(initShortList[initShortList.length - 1].unresolved_amount);
-        initShortList[initShortList.length - 1].unresolved_amount -= Math.abs(ura_2);
-        // console.log('Now ' + p1.name + '\'s unresolved amount is = ' + p1.unresolved_amount);
-        // console.log('And ' + p2.name + '\'s unresolved amount is = ' + p2.unresolved_amount);
+    if (Math.abs(p1.unresolved_amount.amount) > p2.unresolved_amount.amount){
+        console.log(p1.name + ' should pay ' + p2.name + ' $' + Math.abs(p2.unresolved_amount.amount));
+        initShortList[0].unresolved_amount.amount += Math.abs(initShortList[initShortList.length - 1].unresolved_amount.amount);
+        initShortList[initShortList.length - 1].unresolved_amount.amount -= Math.abs(ura_2);
+        
     }
-    else if (Math.abs(p1.unresolved_amount) <= p2.unresolved_amount){
-        console.log(p1.name + ' should pay ' + p2.name + ' $' + Math.abs(p1.unresolved_amount));
-        initShortList[0].unresolved_amount += Math.abs(initShortList[0].unresolved_amount);
-        initShortList[initShortList.length - 1].unresolved_amount -= Math.abs(ura_1);
-        // console.log('Now ' + p1.name + '\'s unresolved amount is = ' + p1.unresolved_amount);
-        // console.log('And ' + p2.name + '\'s unresolved amount is = ' + p2.unresolved_amount);
+    else if (Math.abs(p1.unresolved_amount.amount) <= p2.unresolved_amount.amount){
+        
+        newPayment = new Payment(p1.name, p2.name, p1.unresolved_amount.currency, p1.unresolved_amount.amount);
+        console.log(newPayment.toString);
+        initShortList[0].unresolved_amount.amount += Math.abs(initShortList[0].unresolved_amount.amount);
+        initShortList[initShortList.length - 1].unresolved_amount.amount -= Math.abs(ura_1);
+        
     }
 
     return initShortList;
@@ -296,27 +354,14 @@ done_adding_trans_btn.addEventListener("click", function () {
     shortList = addUnresolvedAmount();//To add an extra attribute 'unresolved_amount' to participants whose net_credit is non-zero; called only once
     
 
-    // let sorted_low_to_high = [];
-    // let sorted_high_to_low = [];
-
     while (shortList.length > 1){
         shortList = resolveADebt(shortList);
         shortList = generateShorterList(shortList);//To shorten the list based on participants whose unresolved_amount is still non-zero; called multiple times
     }
 
     if (shortList.length === 1){
-        console.log(shortList[0].name + ' still has an unresolved amount of: $' + shortList[0].unresolved_amount);
+        console.log(shortList[0].name + ' still has an unresolved amount of: $' + shortList[0].unresolved_amount.amount);
     }
 
-    // sorted_low_to_high.sort(function (p1, p2){
-    //     return p1.net_credit - p2.net_credit;
-    // });
 
-    // sorted_high_to_low.sort(function (p1, p2) {
-    //     return p2.net_credit - p1.net_credit;
-    // });
-
-    // console.log(sorted_low_to_high);
-    // console.log('***************************************');
-    // console.log(sorted_high_to_low);
 });
