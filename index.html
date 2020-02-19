@@ -108,13 +108,31 @@
                 </form>
 
                 <!--h6>Participants added: <span id="num_participants">0</span></h6-->
-                <br>Transactions added: <span id="num_transactions">0</span></p></br>
+                <!--br>Transactions added: <span id="num_transactions">0</span></p></br-->
+                <br>
+                  <p>
+                    <a data-toggle="collapse" href="#addedTransactions" role="button" aria-expanded="false" aria-controls="collapseExample" id="trans_view_link">
+                      <span id="see_or_hide">See</span> the <span id="num_transactions">0</span> transactions added
+                    </a>
+                  </p>
+                  <div class="collapse" id="addedTransactions">
+                    <div class="card card-body" >
+                      <ul id="addedTransList">
+                      </ul>
+                    </div>
+                  </div>
+                </br>
                  <div>
                 </div>
                 <div id="done_adding_transactions">
-                    <button type="button" class="btn btn-primary pl-5 pr-5" id="done_adding_trans_btn">Done Adding</button>
+                    <button type="button" class="btn btn-primary pl-5 pr-5" id="done_adding_trans_btn">Resolve!</button><!--The text on the button was formerly: 'Done Adding'-->
                 </div>
-
+                <div id="debts_resolution">
+                  <!--p style="text-align: center">The generated report will go here!</p-->
+                  <ul id="res_payments">
+                  
+                  </ul>
+                </div>
               </div><!--End of transactions_div-->
               
               

@@ -56,6 +56,10 @@ html {
     width: 12%;
 }
 
+#debts_report{
+    margin: 2%;
+}
+
 #groupmates_section {
     height: 100%;
     /* padding-top: 10%; */
@@ -159,6 +163,21 @@ html {
     background-position: center;
     background-size: cover;
     background-blend-mode: lighten;
+}
+
+#trans_view_link {
+    /* background: transparent;
+    border: none; */
+    font-size: 1.05em;
+    font-weight: 500;
+    /* color: rgba(108, 0, 158, 1); */
+    /* color: rgba(88, 0, 88, 1); */
+    color: black;
+}
+
+#trans_view_link:hover {
+    font-weight: 500;
+    color: rgba(128, 0, 128, 1);
 }
 
 #transaction_add_btn {

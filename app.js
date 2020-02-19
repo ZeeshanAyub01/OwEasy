@@ -181,7 +181,8 @@ var owed_amount = document.getElementById('amount');
 var amount_currency = document.getElementById('currency');
 var transaction_desc = document.getElementById('transaction_desc');
 var done_adding_trans_btn = document.getElementById('done_adding_trans_btn');
-
+var trans_view_link = document.getElementById('trans_view_link');
+var res_payments = document.getElementById('res_payments');
 
 add_btn.addEventListener("click", function(){
     if(parti_name.value){
@@ -251,6 +252,10 @@ transaction_add_btn.addEventListener("click", function () {
         alert('One or more of the names was left blank!');
     }
 
+    var num_transactions = document.getElementById('num_transactions');
+    var addedTransList = document.getElementById('addedTransList');
+    
+
     creditor = added_participants_2.value;
     debtor = added_participants_1.value;
     amount = Number(owed_amount.value);
@@ -266,6 +271,9 @@ transaction_add_btn.addEventListener("click", function () {
     participant_creditor.credits.push(newTransaction);
     participant_debtor.debts.push(newTransaction);
     transactions_list.push(newTransaction);
+
+    num_transactions.textContent = transactions_list.length;
+    addedTransList.innerHTML += '<li>' + newTransaction.toString + '</li>';
 
     added_participants_2.value = "";
     added_participants_1.value = "";
@@ -330,7 +338,11 @@ function resolveADebt(initShortList){
 
 
     if (Math.abs(p1.unresolved_amount.amount) > p2.unresolved_amount.amount){
-        console.log(p1.name + ' should pay ' + p2.name + ' $' + Math.abs(p2.unresolved_amount.amount));
+        // console.log(p1.name + ' should pay ' + p2.name + ' $' + Math.abs(p2.unresolved_amount.amount));
+        newPayment = new Payment(p1.name, p2.name, p1.unresolved_amount.currency, p2.unresolved_amount.amount);
+        payments_list.push(newPayment);
+        // console.log(newPayment.toString);
+        // res_payments.innerHTML += '<li>' + newPayment.toString +'</li>';
         initShortList[0].unresolved_amount.amount += Math.abs(initShortList[initShortList.length - 1].unresolved_amount.amount);
         initShortList[initShortList.length - 1].unresolved_amount.amount -= Math.abs(ura_2);
         
@@ -338,12 +350,14 @@ function resolveADebt(initShortList){
     else if (Math.abs(p1.unresolved_amount.amount) <= p2.unresolved_amount.amount){
         
         newPayment = new Payment(p1.name, p2.name, p1.unresolved_amount.currency, p1.unresolved_amount.amount);
-        console.log(newPayment.toString);
+        payments_list.push(newPayment);
+        // console.log(newPayment.toString);
         initShortList[0].unresolved_amount.amount += Math.abs(initShortList[0].unresolved_amount.amount);
         initShortList[initShortList.length - 1].unresolved_amount.amount -= Math.abs(ura_1);
         
     }
 
+    res_payments.innerHTML += '<li>' + newPayment.toString + '</li>';
     return initShortList;
 
 }
@@ -352,16 +366,35 @@ function resolveADebt(initShortList){
 done_adding_trans_btn.addEventListener("click", function () {
 
     shortList = addUnresolvedAmount();//To add an extra attribute 'unresolved_amount' to participants whose net_credit is non-zero; called only once
-    
+    res_payments.innerHTML = '';
 
     while (shortList.length > 1){
         shortList = resolveADebt(shortList);
         shortList = generateShorterList(shortList);//To shorten the list based on participants whose unresolved_amount is still non-zero; called multiple times
     }
 
+    // for (var i = 0; i < payments_list.length; i++) {
+    //     res_payments.innerHTML += '<li>' + newPayment.toString + '</li>';
+    // }
+
     if (shortList.length === 1){
         console.log(shortList[0].name + ' still has an unresolved amount of: $' + shortList[0].unresolved_amount.amount);
     }
 
+
+});
+
+trans_view_link.addEventListener("click", function (){
+
+    
+    var see_or_hide = document.getElementById('see_or_hide');
+
+    if (see_or_hide.textContent === 'See'){
+        see_or_hide.textContent = 'Hide';
+    }
+    else{
+        see_or_hide.textContent = 'See';
+    }
+    
 
 });
