@@ -1,0 +1,10 @@
+The project currently has basic functionality working at its front-end. 
+
+How the project works:
+1. Click on the get started button, or scroll down to add the names of the pariticipants in the group
+2. Add all the transactions (lending and borrowing) that happened between participants
+3. Click on the button that says Resolve! The resolution of all the transactions added up until that point will be displayed below the resolve button.
+
+Note:
+I discovered a glitch recently with the program, that the program crashes if one or more of the particpants haven't been added to any of the 
+transactions. So make sure to include each participant in atleast one of the transactions. I will soon fix this issue.
