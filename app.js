@@ -32,7 +32,7 @@ class Participant {
             total_credit_amount += Number(this._credits[i].amount);
         }
 
-        if (total_credit_amount === 0){
+        if (total_credit_amount === 0 && this._debts.length != 0){
             total_credit_currency = this._debts[0].currency;
             //console.log('THis total credit currency and name: ' + this._debts[0].currency+this._name);
         }
@@ -48,7 +48,7 @@ class Participant {
             total_debt_amount += Number(this._debts[i].amount);
         }
 
-        if (total_debt_amount === 0) {
+        if (total_debt_amount === 0 && this._credits.length != 0 ) {
             total_debt_currency = this._credits[0].currency;
         }
 
@@ -254,7 +254,7 @@ transaction_add_btn.addEventListener("click", function () {
 
     var num_transactions = document.getElementById('num_transactions');
     var addedTransList = document.getElementById('addedTransList');
-    
+    var added_or_resolved = document.getElementById('added_or_resolved');
 
     creditor = added_participants_2.value;
     debtor = added_participants_1.value;
@@ -274,6 +274,7 @@ transaction_add_btn.addEventListener("click", function () {
 
     num_transactions.textContent = transactions_list.length;
     addedTransList.innerHTML += '<li>' + newTransaction.toString + '</li>';
+    added_or_resolved.textContent = 'added';
 
     added_participants_2.value = "";
     added_participants_1.value = "";
@@ -376,6 +377,8 @@ done_adding_trans_btn.addEventListener("click", function () {
     // for (var i = 0; i < payments_list.length; i++) {
     //     res_payments.innerHTML += '<li>' + newPayment.toString + '</li>';
     // }
+    var added_or_resolved = document.getElementById('added_or_resolved');
+    added_or_resolved.textContent = 'resolved';
 
     if (shortList.length === 1){
         console.log(shortList[0].name + ' still has an unresolved amount of: $' + shortList[0].unresolved_amount.amount);
