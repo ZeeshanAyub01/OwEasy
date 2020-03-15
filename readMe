@@ -6,5 +6,4 @@ How the project works:
 3. Click on the button that says Resolve! The resolution of all the transactions added up until that point will be displayed below the resolve button.
 
 Note:
-I discovered a glitch recently with the program, that the program crashes if one or more of the particpants haven't been added to any of the 
-transactions. So make sure to include each participant in atleast one of the transactions. I will soon fix this issue.
+The glitch found recently was fixed. The front end seems to work perfectly. Feel free to report any problems to me at: ayubm@uoguelph.ca
